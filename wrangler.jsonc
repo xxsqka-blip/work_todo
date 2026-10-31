@@ -1,0 +1,20 @@
+// Cloudflare Workers 配置。
+// 在 Cloudflare 网页上把这个 GitHub 仓库连到名为 "work-todo" 的 Worker 后，
+// 每次推送代码，Cloudflare 会自动执行：
+//   构建命令  npm run build      （生成 dist/ 目录）
+//   部署命令  npx wrangler deploy （把 dist/ 发布出去）
+// 演示版只有网页文件（static assets），还没有后端代码；第 2 步会在这里加上 main、D1 数据库和定时任务。
+// 自己的域名在 Cloudflare 网页上绑定（见 docs/演示版部署.md），这里不写域名，部署时不会改动它。
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "work-todo",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    // 找不到的地址一律返回 index.html（单页应用）
+    "not_found_handling": "single-page-application"
+  },
+  "observability": {
+    "enabled": true
+  }
+}

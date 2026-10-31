@@ -1,0 +1,14 @@
+# Cloudflare 静态文件的缓存规则
+# service worker、页面和 manifest 每次都检查有没有新版本，保证推送新代码后能及时更新
+/sw.js
+  Cache-Control: no-cache
+/index.html
+  Cache-Control: no-cache
+/
+  Cache-Control: no-cache
+/manifest.webmanifest
+  Cache-Control: no-cache
+
+# 带哈希的文件名，内容变了文件名就变，可以长期缓存
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
